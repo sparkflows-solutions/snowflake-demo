@@ -1,0 +1,148 @@
+{
+  "id": 501,
+  "userId": 3,
+  "uuid": "4e699ef7-8b97-4f1f-b7bc-cec788e84672",
+  "version": 0,
+  "name": "Snowflake_Dataset",
+  "category": "Churn Prediction",
+  "header": false,
+  "path": "MY_DB|CHURN_PREDICTION|MY_SC",
+  "datasetType": "SNOWFLAKE",
+  "datasetSchema": "{colNames:[\"STATE\",\"ACCOUNT_LENGTH\",\"AREA_CODE\",\"PHONE_NUMBER\",\"INTL_PLAN\",\"VOICE_MAIL_PLAN\",\"NUMBER_VMAIL_MESSAGES\",\"TODAY_DAY_MINUTES\",\"TODAY_DAY_CALLS\",\"TODAY_DAY_CHANGE\",\"TOTAL_EVE_MINUTES\",\"TOTAL_EVE_CALL\",\"TOTAL_EVE_CHARGE\",\"TOTAL_NIGHT_MINUTES\",\"TOTAL_NIGHT_CALLS\",\"TOTAL_NIGHT_CHARGE\",\"TOTAL_INTL_MINUTES\",\"TOTAL_INTL_CALLS\",\"TOTAL_INTL_CHARGE\",\"NUMBER_CUSTOMER_SERVICE_CALLS\",\"CHURNED\"],colTypes:[\"STRING\",\"DOUBLE\",\"DOUBLE\",\"STRING\",\"STRING\",\"STRING\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"STRING\"],colFormats:[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"],colMLTypes:[\"TEXT\",\"NUMERIC\",\"NUMERIC\",\"TEXT\",\"TEXT\",\"TEXT\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"NUMERIC\",\"TEXT\"]}",
+  "dateCreated": "Mar 1, 2023 10:56:36 PM",
+  "dateLastUpdated": "Mar 1, 2023 10:56:36 PM",
+  "schemaModel": {
+    "schemaColList": [
+      {
+        "colName": "STATE",
+        "colType": "STRING",
+        "colFormat": "",
+        "colMLType": "TEXT"
+      },
+      {
+        "colName": "ACCOUNT_LENGTH",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "AREA_CODE",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "PHONE_NUMBER",
+        "colType": "STRING",
+        "colFormat": "",
+        "colMLType": "TEXT"
+      },
+      {
+        "colName": "INTL_PLAN",
+        "colType": "STRING",
+        "colFormat": "",
+        "colMLType": "TEXT"
+      },
+      {
+        "colName": "VOICE_MAIL_PLAN",
+        "colType": "STRING",
+        "colFormat": "",
+        "colMLType": "TEXT"
+      },
+      {
+        "colName": "NUMBER_VMAIL_MESSAGES",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TODAY_DAY_MINUTES",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TODAY_DAY_CALLS",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TODAY_DAY_CHANGE",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TOTAL_EVE_MINUTES",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TOTAL_EVE_CALL",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TOTAL_EVE_CHARGE",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TOTAL_NIGHT_MINUTES",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TOTAL_NIGHT_CALLS",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TOTAL_NIGHT_CHARGE",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TOTAL_INTL_MINUTES",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TOTAL_INTL_CALLS",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "TOTAL_INTL_CHARGE",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "NUMBER_CUSTOMER_SERVICE_CALLS",
+        "colType": "DOUBLE",
+        "colFormat": "",
+        "colMLType": "NUMERIC"
+      },
+      {
+        "colName": "CHURNED",
+        "colType": "STRING",
+        "colFormat": "",
+        "colMLType": "TEXT"
+      }
+    ]
+  },
+  "projectId": 352,
+  "connectionId": 7,
+  "dropSpecialCharacterInColumnName": true,
+  "multiLine": false
+}
