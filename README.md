@@ -2,7 +2,7 @@
 
 ## Steps to Run the Sample Application
 
-- Install Sparkflows
+- Install Sparkflows in Laptop/VM/Cloud
    - https://docs.sparkflows.io/en/latest/installation/installation/index.html
    
 - Create Snowflake Connection
