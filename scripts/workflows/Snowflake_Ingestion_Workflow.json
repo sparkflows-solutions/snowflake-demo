@@ -1,0 +1,354 @@
+{
+  "name": "Snowflake_Ingestion_Workflow",
+  "uuid": "4fd10993-3002-4cd7-acd3-461108364e86",
+  "category": "-",
+  "nodes": [
+    {
+      "id": "3",
+      "name": "Write To SnowFlake",
+      "description": "",
+      "details": "<h2> Write To SnowFlake Node Details</h2>\n<br>\nThis node saves the rows of the incoming dataframe into the specified table in Snowflake.<br>\n<br>\n<h4> Parameters to be set:</h4>\n<ul>\n<li> OUTPUT STORAGE LEVEL : Keep this as DEFAULT.</li>\n<li> CONNECTION : Select the desired snowflake connection to be used.</li>\n<li> SNOWFLAKE WAREHOUSE : Specify the virtual warehouse to use for the connection.</li>\n<li> SNOWFLAKE DATABASE : Specify the database to use once connected.</li>\n<li> SNOWFLAKE SCHEMA : Specify the schema to use for the specified database once connected.</li>\n<li> SNOWFLAKE TABLE : Specify the table from which data is to be read.</li>\n<li> SAVE MODE : Select the mode of operation on the table. </li>\n</ul>\nOverwrite: If table already exists, existing data is overwritten by the new content. <br>\nErrorIfExists: If data already exists, an exception is thrown and operation stops.<br>\nIgnore: If table already exists, the save operation is ignored.<br>",
+      "examples": "<h2> Write To SnowFlake Node Examples</h2>\n<br>\n<h4> The below example will save the input dataframe to the `CUST_BASIC_LA` table.</h4>\n<br>\n<ul>\n<li> CONNECTION : SNOWFLAKE_DEV_ENV_NCUS</li>\n<li> SNOWFLAKE WAREHOUSE : SNOWFLAKE_BI_VWH</li>\n<li> SNOWFLAKE DATABASE : CUSTOMER_SALES_NCUS</li>\n<li> SNOWFLAKE SCHEMA : INT_NA_CUSTSALES</li>\n<li> SNOWFLAKE TABLE : CUST_BASIC_LA</li>\n<li> SAVE MODE : Overwrite</li>\n</ul>",
+      "type": "transform",
+      "nodeClass": "fire.nodes.snowflake.NodeWriteToSnowFlake",
+      "x": "435.875px",
+      "y": "120.875px",
+      "fields": [
+        {
+          "name": "storageLevel",
+          "value": "DEFAULT",
+          "widget": "array",
+          "title": "Output Storage Level",
+          "description": "Storage Level of the Output Datasets of this Node",
+          "optionsArray": [
+            "DEFAULT",
+            "NONE",
+            "DISK_ONLY",
+            "DISK_ONLY_2",
+            "MEMORY_ONLY",
+            "MEMORY_ONLY_2",
+            "MEMORY_ONLY_SER",
+            "MEMORY_ONLY_SER_2",
+            "MEMORY_AND_DISK",
+            "MEMORY_AND_DISK_2",
+            "MEMORY_AND_DISK_SER",
+            "MEMORY_AND_DISK_SER_2",
+            "OFF_HEAP"
+          ],
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "connection",
+          "value": "7",
+          "widget": "object_array",
+          "title": "Connection",
+          "description": "The Snowflake connection to connect",
+          "required": true,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "sfWarehouse",
+          "value": "COMPUTE_WH",
+          "widget": "textfield",
+          "title": "Snowflake Warehouse",
+          "description": "Warehouse for connecting to the Snowflake",
+          "required": true,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "sfDatabase",
+          "value": "MY_DB",
+          "widget": "textfield",
+          "title": "Snowflake Database",
+          "description": "Database for connecting to the Snowflake",
+          "required": true,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "sfSchema",
+          "value": "MY_SC",
+          "widget": "textfield",
+          "title": "Snowflake Schema",
+          "description": "Schema for connecting to the Snowflake",
+          "required": true,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "dbtable",
+          "value": "churn_prediction",
+          "widget": "textfield",
+          "title": "Snowflake Table",
+          "description": "Snowflake Table from which to read the data",
+          "required": true,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "saveMode",
+          "value": "Append",
+          "widget": "array",
+          "title": "Save Mode",
+          "description": "Whether to Append, Overwrite or Error if the table Exists",
+          "optionsArray": [
+            "Append",
+            "Overwrite",
+            "ErrorIfExists",
+            "Ignore"
+          ],
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        }
+      ],
+      "engine": "all"
+    },
+    {
+      "id": "5",
+      "name": "Read Churn Data",
+      "description": "It reads in CSV files and creates a DataFrame from it",
+      "details": "<h2>Read CSV Details</h2>\n<br>\nThis node reads CSV files and creates a DataFrame from it. It can read either from a single file, or a directory containing multiple files. The user can configure the below fields to parse the file.<br>\n<br>\nThe user can choose the <b>Output storage level</b> from the drop down. The options in the dropdown can be one of the following:<br>\n<ul>\n<li> <b>MEMORY_ONLY</b>          Store RDD as deserialized Java objects in the JVM. If the RDD does not fit in memory, some partitions will not be cached and will be recomputed on the fly each time they qre needed. This is the default level.</li>\n<li> <b>MEMORY_AND_DISK</b>       Store RDD as deserialized Java objects in the JVM. If the RDD does not fit in memory, store the partitions that do nott fit on disk, and read them from there when they are needed.</li>\n<li> <b>MEMORY_ONLY_SER</b>        Store RDD as serialized Java objects (one byte array per partition). This is generally more space-efficient than deserialized objects, especially when using a fast serializer, but more CPU-intensive to read.</li>\n<li> <b>MEMORY_AND_DISK_SER</b>    Similar to MEMORY_ONLY_SER, but spill partitions that do not fit in memory to disk instead of recomputing them on the fly each time they're needed.</li>\n<li> <b>DISK_ONLY</b>              Store the RDD partitions only on disk.</li>\n<li> <b>MEMORY_ONLY_2, MEMORY_AND_DISK_2 others </b> . Same as the levels above, but replicate each partition on two cluster nodes.</li>\n<li> <b>OFF_HEAP</b>               Similar to MEMORY_ONLY_SER, but store the data in off-heap memory. This requires off-heap memory to be enabled.</li>\n</ul>\nThe user need to provide a data file <b>Path</b> to read the data from. This is a required field.<br>\n<br>\nThe user can choose the <b>Seperator</b> used in the data file to parse it. The default seperator is <b>( , )</b> comma.<br>\n<br>\nIn the <b>Header</b> field, one can choose:<br>\n<ul>\n<li> <b>true</b> if the data file has header.</li>\n<li> <b>false</b> Otherwise.</li>\n</ul>\nIn the <b>Drop special character in column name</b> field, one can choose:<br>\n<ul>\n<li> <b>true</b> If you want to remove the special characters from column names.</li>\n<li> <b>false</b> Otherwise.</li>\n</ul>\nIn the <b>Mode</b> field, one can choose from the below options in the dropdown:<br>\n<ul>\n<li> <b>PERMISSIVE</b> When the parser meets a corrupt field in a records, it sets the value of the field to NULL and continues to the next record.</li>\n<li> <b>DROPMALFORMED</b> ignores the whole corrupted records.</li>\n<li> <b>FAILFAST</b> throws an exception when it meets corrupted records.</li>\n</ul>\nIn the <b>Enforce Schema</b> field, one can choose:<br>\n<ul>\n<li> <b>true</b> The specified or inferred schema will be forcibly applied to datasource files, and headers in CSV files will be ignored.</li>\n<li> <b>false</b> The schema will be validated against all headers in CSV files in the case when the header option is set to <b>false</b>.</li>\n</ul>\nIn the <b>Whether to add input file as a column in dataframe</b> field, one can choose:<br>\n<ul>\n<li> <b>true</b> There will be a new column added in the dataframe at the end which can be seen in the schema columns. One can enter the name of this column.</li>\n<li> <b>false</b> This functionality is disabled and the dataframe consists of only the columns read from the data file.</li>\n</ul>\nIn the <b>ENCODING</b> field one can specify the encoding type to be used for reading the files. By default it is set as <b>UTF-8</b>.<br>\n<br>\nThe <b>QUOTE</b> field sets a single character used for escaping quoted values where the separator can be part of the value. The default value for this is <b>( \" )</b>, a double quote.<br>\n<br>\nThe <b>ESCAPE</b> field sets a single character used for escaping quotes inside an already quoted value. The default value for this is <b>( \\ )</b>, a backslash.\t<br>\n<br>\nAfter the above options are set, one can click on <b>Refresh Schema</b> to see the final columns.<br>\nUsers can still add or delete columns using <b>+</b> button next to theRefresh schema and <b>-</b> button next to the column names.<br>",
+      "examples": "",
+      "type": "dataset",
+      "nodeClass": "fire.nodes.dataset.NodeDatasetCSV",
+      "x": "74.71875px",
+      "y": "142.703125px",
+      "hint": "Whenever the file is changed, Refresh the Schema",
+      "fields": [
+        {
+          "name": "storageLevel",
+          "value": "DEFAULT",
+          "widget": "array",
+          "title": "Output Storage Level",
+          "description": "Storage Level of the Output Datasets of this Node",
+          "optionsArray": [
+            "DEFAULT",
+            "NONE",
+            "DISK_ONLY",
+            "DISK_ONLY_2",
+            "MEMORY_ONLY",
+            "MEMORY_ONLY_2",
+            "MEMORY_ONLY_SER",
+            "MEMORY_ONLY_SER_2",
+            "MEMORY_AND_DISK",
+            "MEMORY_AND_DISK_2",
+            "MEMORY_AND_DISK_SER",
+            "MEMORY_AND_DISK_SER_2",
+            "OFF_HEAP"
+          ],
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "path",
+          "value": "data/churn_prediction",
+          "widget": "textfield",
+          "title": "Path",
+          "description": "Path of the file/directory",
+          "required": true,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "separator",
+          "value": ",",
+          "widget": "textfield",
+          "title": "Separator",
+          "description": "CSV Separator",
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "header",
+          "value": "false",
+          "widget": "array",
+          "title": "Header",
+          "description": "Whether the file has a header row",
+          "optionsArray": [
+            "true",
+            "false"
+          ],
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "dropSpecialCharacterInColumnName",
+          "value": "true",
+          "widget": "array",
+          "title": "Drop Special Character In ColumnName",
+          "description": "Whether to drop the Special Characters and Spaces in Column Name.",
+          "optionsArray": [
+            "true",
+            "false"
+          ],
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "mode",
+          "value": "PERMISSIVE",
+          "widget": "array",
+          "title": "Mode",
+          "description": "Mode for dealing with corrupt records during parsing.",
+          "optionsArray": [
+            "PERMISSIVE",
+            "DROPMALFORMED",
+            "FAILFAST"
+          ],
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "enforceSchema",
+          "value": "false",
+          "widget": "array",
+          "title": "Enforce Schema",
+          "description": "If it is set to true, the specified or inferred schema will be forcibly applied to datasource files, and headers in CSV files will be ignored. If the option is set to false, the schema will be validated against all headers in CSV files in the case when the header option is set to true.",
+          "optionsArray": [
+            "false",
+            "true"
+          ],
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "addInputFileName",
+          "value": "false",
+          "widget": "array",
+          "title": "Whether to add Input File Name as a column in the Dataframe",
+          "description": "Add the new field:input_file_name",
+          "optionsArray": [
+            "false",
+            "true"
+          ],
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8",
+          "widget": "textfield",
+          "title": "Encoding",
+          "description": "Decodes the CSV files by the given encoding type",
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "quote",
+          "value": "\"",
+          "widget": "textfield",
+          "title": "Quote",
+          "description": "Sets a single character used for escaping quoted values where the separator can be part of the value",
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "escape",
+          "value": "\\",
+          "widget": "textfield",
+          "title": "Escape",
+          "description": "Sets a single character used for escaping quotes inside an already quoted value.",
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "outputColNames",
+          "value": "[\"state\",\" account_length\",\" area_code\",\"phone_number\",\" intl_plan\",\" voice_mail_plan\",\" number_vmail_messages\",\" today_day_minutes\",\"today_day_calls\",\"today_day_change\",\"total_eve_minutes\",\" total_eve_call\",\" total_eve_charge\",\" total_night_minutes\",\" total_night_calls\",\" total_night_charge\",\" total_intl_minutes\",\" total_intl_calls\",\" total_intl_charge\",\" number_customer_service_calls\",\"churned\"]",
+          "widget": "schema_col_names",
+          "title": "Column Names for the CSV",
+          "description": "New Output Columns of the SQL",
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "outputColTypes",
+          "value": "[\"STRING\",\"DOUBLE\",\"DOUBLE\",\"STRING\",\"STRING\",\"STRING\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"DOUBLE\",\"STRING\"]",
+          "widget": "schema_col_types",
+          "title": "Column Types for the CSV",
+          "description": "Data Type of the Output Columns",
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        },
+        {
+          "name": "outputColFormats",
+          "value": "[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"]",
+          "widget": "schema_col_formats",
+          "title": "Column Formats for the CSV",
+          "description": "Format of the Output Columns",
+          "required": false,
+          "display": true,
+          "editable": true,
+          "disableRefresh": false,
+          "expandable": false
+        }
+      ],
+      "engine": "all"
+    }
+  ],
+  "edges": [
+    {
+      "source": "5",
+      "target": "3",
+      "id": 1
+    }
+  ],
+  "dataSetDetails": [],
+  "engine": "scala"
+}
